@@ -1,0 +1,172 @@
+{% extends 'html/index.html' %} {% include 'html/index.html' %} 
+{% block content %}
+
+<!DOCTYPE html>
+<html class="no-js">
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Admin Edit</title>
+      <meta name="description" content="" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="" />
+
+      <style>
+        * {
+          padding: 0;
+          margin: 0;
+        }
+        .edit-comment {
+          width: 100vw;
+          min-height: 100vh;
+          background: #fff;
+        }
+        .edit-comment .header {
+          width: 100%;
+          background: #48d1cc;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          margin-bottom: 20px;
+          color: #fff;
+        }
+        .search-comment {
+          width: 70%;
+          display: felx;
+          align-items: center;
+          margin: auto;
+          justify-content: center;
+          {% comment %} border: 1px solid black; {% endcomment %}
+          min-height: 70vh;
+          padding: 15px;
+        }
+        .comment label {
+          font-size: 1.7em;
+          font-weight: 600;
+        }
+
+        .comment .search-input {
+          width: 60%;
+          padding: 10px;
+          border-radius: 10px;
+          outline: 0.3px solid gray;
+          border: 0.3px solid gray;
+          margin-left: 20px;
+          margin-right: 50px;
+          font-weight: bold;
+          font-size: 1em;
+        }
+
+        .comment .search-button {
+          border: 1px solid #00fa9a;
+          background: #00fa9a;
+          padding: 10px;
+          border-radius: 5px;
+          color: #fff;
+          font-weight: bold;
+          font-size: 1em;
+          cursor:pointer;
+          transition:0.7s;
+        }
+        .comment .search-button:hover{
+            background:#32CD32;
+        }
+        .comment{
+            margin-bottom: 30px;
+        }
+
+        .form-remove-comment{
+            margin-top:28px;
+            margin-right:20px;
+        }
+
+        .form-remove-comment input{
+            background:red;
+            color:red;
+            outline:2px #1E90FF solid;
+            cursor:pointer;
+            checkbox:red;
+        }
+
+        .edit{
+            padding:5px 20px;
+            background:green;
+            color:#fff;
+            border:none;
+            cursor:pointer;
+            font-size:1em;
+            border-radius:10px;
+            font-wight:bold;
+            display:inline-block;
+            width:70px;
+            margin-top:10px;
+        }
+
+
+
+      </style>
+    </head>
+    <body>
+      <section class="edit-comment">
+        <div class="header">
+          <h1>EDIT COMMENTS</h1>
+        </div>
+        {% block comment %}
+        <div class="search-comment">
+          <form method="GET" class="comment">
+            <label>Search-Comment:</label>
+            <input
+              type="Search"
+              placeholder="Saerch Comment"
+              class="search-input"
+              name="search"
+            />
+            <input type="submit" class="search-button" value="Search" />
+          </form>
+          {% comment %} start comment {% endcomment %} 
+          {% for i in comments_models reversed %}
+          {% if i.name == search or search == "all.admin"%}
+          <div class="user-real-comment">
+
+            <div class="user-photo-comment">
+              {% if i.image %}
+              <img src="{{i.image.url}}"  alt="user-photo"  width="60px"  height="60px" style="border-radius: 100px;margin-right: 10px;border: 1px solid gray;"/>
+              {% endif %}
+            </div>
+              <div class="comment-posted">
+                <h3
+                  class="com-write"
+                  style="font-weight: 100; font-family: 'Phudu', cursive"
+                >
+                  {{i.name|capfirst}}
+                </h3>
+                <p style="font-size: 0.9em; color: gray">{{i.time}}</p>
+                <h4 class="com-write" style="display:flex;font-weight:bold">{{i.comment|truncatechars:90}}</h4>
+                <a class="edit" href="/edit_comment_page/{{i.id}}">edit</a>
+              </div>
+ 
+            <hr>
+          </div>
+          
+          {% endif %}
+          {% endfor %}
+          <!---->
+          
+        </div>
+        {% endblock comment %}
+      </section>
+    </body>
+  </html>
+  {% endblock content %}
+
+
+
+  {% comment %} <form method="POST">
+    {% csrf_token %}
+    <input name="edit-com" class="com-write" style="display: flex; font-weight: bold;width:95%;padding:10px;border-radius:10px;border:0.2px solid gray" value="{{i.comment|truncatechars:90}}">
+    <br>
+    <input type="submit" value="Edit" class="edit">
+</form> {% endcomment %}

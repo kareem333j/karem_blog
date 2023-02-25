@@ -1,0 +1,57 @@
+{% extends 'html/index.html' %}
+{% include 'html/index.html' %} 
+
+{% block content %}
+{% load static %}
+<style>
+  .title{
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100vw;
+  }
+  .title span{
+    color:red;
+  }
+</style>
+
+<div class="title">
+  <a href="#">
+    <h1>KAREM <span>MAGDY</span></h1>
+  </a>
+</div>
+
+
+<nav class="options2">
+  <a href="{% url 'index' %}"
+    ><i class="fa-sharp fa-solid fa-house-chimney"></i
+  ></a>
+
+</nav>
+
+<nav class="option-phone" style="width:100vw;margin:auto">
+  <div style="margin:auto;display:flex;align-items:center;width:100vw">
+    <a href="{% url 'index' %}" >
+      </i><i class="fa-solid fa-arrow-left" style="color:#000"></i>
+    </a>
+
+  </div>
+</nav>
+<div class="user-real-comment">
+    {% comment %} <div class="comment-content"> {% endcomment %}
+      <div class="user-photo-comment">
+        <img src="{{pk.image.url}}"  alt="user-photo"  width="60px"  height="60px" style="border-radius: 100px;margin-right: 10px;border: 1px solid gray;"/>
+      </div>
+      <div class="comment-posted">
+        <h3 class="com-write" style="font-weight:100;font-family: 'Phudu', cursive;">{{pk.name|capfirst}}</h3>
+        <p style="font-size:0.9em;color:gray">{{pk.time}}</p>
+        <h4 class="com-write" style="display:flex;font-weight:bold">{{pk.comment}}</h4>
+      </div>
+    {% comment %} </div> {% endcomment %}
+    <hr>
+
+  </div>
+  <script src="{% static 'main.js' %}"></script>
+
+{% endblock content %}

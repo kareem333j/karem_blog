@@ -1,0 +1,39 @@
+{% extends 'html/edit.html' %}
+
+{% include 'html/index.html' %} 
+{% block comment %}
+
+<style>
+    .edition{
+        width:100vh;
+        min-height:100vh;
+        margin:auto;
+    }
+</style>
+    <div class="edition">
+        <div class="comment-form">
+            <form method="POST">
+                {% csrf_token %}
+                <h3>Name: </h3>
+                <br>
+                <input type="text" name="name" value={{pg.name}}>
+                <br>
+                <h3>Comment: </h3>
+                <br>
+                <input type="text" name="comment" value="{{pg.comment}}">
+                <br>
+                <h3>Time</h3>
+                <br>
+                {{comment.time}}
+                <br>
+                <h3>Delete:</h3>
+                <br>
+                <input type="text" name="activation" placeholder="Press ('True') To Delete">
+                <p style="color:red;font-weight:bold;margin-bottom:10px">Press ("True") To Delete The Comment</p> 
+                <br>
+                {{comment.image}}
+                <input type="submit" value="Save"class="save-comment"/>
+            </form>
+        </div>
+    </div>
+{% endblock comment %}

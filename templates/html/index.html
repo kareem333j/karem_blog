@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"
+    />
+    <title>Karem Magdy</title>
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+
+    {% comment %} style {% endcomment %}
+
+    <style>
+      .comment-div {
+        z-index: 1;
+        min-height: 100vh;
+        width: 100vw;
+        background: rgba(231, 215, 215, 0.219);
+        display: flex;
+        {% comment %} justify-content: center; {% endcomment %}
+        {% comment %} align-items: left; {% endcomment %}
+        flex-direction: column;
+        margin: auto;
+        {% comment %} border: 1px solid black; {% endcomment %}
+        padding-top:40px;
+      }
+
+      .comment-content {
+        display: flex;
+        justify-content: left;
+        flex-direction: row;
+        width:100%;
+      }
+
+      .comment-posted {
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        line-height: 1.4em;
+        width:100%;
+        overflow:hidden;
+      }
+
+      .user-real-comment {
+        border: 1px 0 solid black;
+        margin-bottom: 10px;
+        display:flex;
+        flex-direction:row;
+        justify-content: center;
+        background: linear-gradient(90deg,#fff,#ADD8E6);
+        padding:5px 0 5px 5px;
+        width:100%;
+        min-height:10px;
+        overflow: hidden;
+      }
+
+
+      .comment-content {
+        {% comment %} border:1px solid black; {% endcomment %}
+        display:flex;
+        max-width:99%;
+        flex-direction:row;
+        justify-content: space-between;
+        align-items:left;
+      }
+
+      .co-style{
+        margin:auto;
+        width:60%;
+        padding:10px 10px;
+        display:flex;
+        flex-direction:column;
+        {% comment %} border:1px solid blue; {% endcomment %}
+        overflow:hidden;
+      }
+      
+      @media (max-width: 1024px){
+        .co-style{
+            width:100%;
+        }
+      }
+
+      hr{
+        color:blue;
+        width:10px;
+        background:blue;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .comment-form input{
+        width: 100%;
+        display:flex;
+        justify-content:center;
+        align-items:right;
+        margin-bottom:20px;
+        font-size:1em;
+        padding:10px;
+        border:0.3px solid #778899;
+        outline:0;
+        font-wight:bold;
+        font-size:1.5em;
+
+      }
+      .comment-form textarea{
+        width:70%;
+        border:0.3px solid #778899;
+        {% comment %} outline:1px solid blue; {% endcomment %}
+        margin-bottom:40px;
+        padding:10px;
+        font-size: 1.4em;
+        width:100%;
+      }
+
+      .span-comment{
+        width:30%;
+        margin:auto;
+        margin-bottom:50px;
+        margin-top:50px;
+        hight:1px;
+        background:#87CEFA;
+        color:blue;
+        font-size:5px;
+      }
+      .com-write{
+        display:flex;
+        align-items:center;
+      }
+
+      .save-comment{
+        background:#4169E1;
+        cursor:pointer;
+        color:#fff;
+        font-wight:bold;
+        font-size:1.5em;
+        transition:all .7s;
+        border-radius: 10px;
+        
+      }
+      .save-comment:hover{
+        background:blue;
+        border-radius: 10px;
+        transform:scale(1.02);
+      }
+
+      .title-comment{
+        margin:auto;
+        margin-bottom:50px;
+        font-size:1.7em;
+        color:gray;
+
+      }
+
+      {% comment %} .user_photo_comment img{
+        width="60px";
+        height="60px";
+        border-radius: 100px;
+        margin-right: 10px;
+        border: 1px solid gray;
+      } {% endcomment %}
+
+    </style>
+  </head>
+
+  <body>
+    {% block content %}
+    
+    <div id="particles-js">
+      <div class="main-title">
+        <a href="#">
+          <h1>KAREM <span>MAGDY</span></h1>
+        </a>
+      </div>
+      <div class="main-content">
+        {% for x in adminphoto %}
+            {% if x.activate == True %}
+                <div class="admin-div" style="border:3px solid blue">
+                    <img class="admin-photo" src="{{x.image.url}}" class="admin-photo" />
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="main-more">
+          <h2>
+            Karem Magdy
+            <span class="material-symbols-outlined"> verified </span>
+          </h2>
+          <p style="margin-bottom:3px">Personal Blog</p>
+          <p style="margin-bottom:5px;font-size:0.9em">(Front-Back)End developer</p>
+        </div>
+        <div class="social-icons">
+          <div>
+            <a
+              href="https://www.facebook.com/karem.magdy1287s.el"
+              target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.instagram.com/k2rem_m2gdy/" target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#https://twitter.com/K2remM" target="_blank"
+              ><i class="fa-brands fa-twitter"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/karem-magdy-904354251/"
+              target="_blank"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <nav class="options2">
+        <a href="{% url 'index' %}"
+          ><i class="fa-sharp fa-solid fa-house-chimney"></i
+        ></a>
+        <a href="#particles-js"><i class="fa-solid fa-user"></i></a>
+        <a href="#potofolio"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="#skills"><i class="fa-solid fa-address-card"></i></a>
+        <a href="#contact"><i class="fa-solid fa-headset"></i></a>
+      </nav>
+
+      <nav class="option-phone">
+        <div>
+          <a href="{% url 'index' %}"
+            ><i class="fa-sharp fa-solid fa-house-chimney"></i
+          ></a>
+          <a href="#skills"><i class="fa-solid fa-address-card"></i></a>
+          <a href="#particles-js"><i class="fa-solid fa-user"></i></a>
+          <a href="#contact"><i class="fa-solid fa-headset"></i></a>
+          <a href="#potofolio"><i class="fa-solid fa-briefcase"></i></a>
+        </div>
+      </nav>
+    </div>
+    <section id="skills" class="about-content-main">
+      <div class="about">
+        <h2>skills</h2>
+      </div>
+      <div class="about-content">
+        <div class="container">
+          <div class="circular-progress">
+            <span class="progress-value">0%</span>
+          </div>
+          <span class="text-value">HTML</span>
+        </div>
+
+        <div class="container">
+          <div class="circular-progress2">
+            <span class="progress-value2">0%</span>
+          </div>
+          <span class="text-value">CSS</span>
+        </div>
+
+        <div class="container">
+          <div class="circular-progress3">
+            <span class="progress-value3">0%</span>
+          </div>
+          <span class="text-value">JavaScript</span>
+        </div>
+
+        <div class="container">
+          <div class="circular-progress4">
+            <span class="progress-value4">0%</span>
+          </div>
+          <span class="text-value">PYTION</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="potofolio" class="port-content">
+      <div class="main-content2">
+        <h2>PORTOFOLIO</h2>
+      </div>
+      <div class="main-content3">
+        <div class="card-port">
+          <div class="div-img">
+            <img src="{% static 'image/1.png' %}" alt="img-portfolio" />
+            <h2>A&M Company</h2>
+          </div>
+          <div class="port-items">
+            <p>A Site For Shopping</p>
+            <a
+              target="_blank"
+              href="https://kareem333j.github.io/A-M-COMPANY/?fbclid=IwAR0xTGXSxnWBuAN3kTglfhW5DIeGFbvhbduAxNFSOSnXrKEUHPbF0fXry9E#"
+              >Vist</a
+            >
+          </div>
+        </div>
+        <div class="card-port">
+          <div class="div-img">
+            <img src="{% static 'image/2.png' %}" alt="img-portfolio" />
+            <h2>A&M Company</h2>
+          </div>
+          <div class="port-items">
+            <p>A Site For Shopping</p>
+            <a
+              target="_blank"
+              href="https://kareem333j.github.io/A-M-COMPANY/?fbclid=IwAR0xTGXSxnWBuAN3kTglfhW5DIeGFbvhbduAxNFSOSnXrKEUHPbF0fXry9E#"
+              >Vist</a
+            >
+          </div>
+        </div>
+        <div class="card-port">
+          <div class="div-img">
+            <img src="{% static 'image/3.png' %}" alt="img-portfolio" />
+            <h2>Shoping Company</h2>
+          </div>
+          <div class="port-items">
+            <p>A Site For Shopping</p>
+            <a
+              target="_blank"
+              href="https://kareem444j.github.io/shopping/?fbclid=IwAR0Yi_Syz9ifO3_I7qXlRwcPZ4nAW-c-1w3ahnQG4LwujTiWRiEv6ovqsZo"
+              >Vist</a
+            >
+          </div>
+        </div>
+        <div class="card-port">
+          <div class="div-img">
+            <img src="{% static 'image/4.png' %}" alt="img-portfolio" />
+            <h2>Personal Plog</h2>
+          </div>
+          <div class="port-items">
+            <p>A personal site for you</p>
+            <a
+              target="_blank"
+              href="https://nt2uyruqis93y6cywcgg5g.on.drv.tw/my/admin.html"
+              >Vist</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="cantactMe">
+      <div class="contact-title">
+        <h2>CONTACT ME</h2>
+      </div>
+      <div class="foucs">
+        <h4>
+          If you want to program your site or want to help with programming, you
+          can contact me through the following links and these services are for
+          a small fee
+        </h4>
+        <span>
+          <i class="fa-solid fa-caret-down"></i>
+        </span>
+      </div>
+      <div class="tawasol">
+        <div class="social_1">
+          <a
+            class="faecbook"
+            href="https://www.facebook.com/karem.magdy1287s.el"
+            target="_blank"
+            >Facebook</a
+          >
+          <a
+            class="instagram"
+            href="https://www.instagram.com/k2rem_m2gdy/"
+            target="_blank"
+            >Instagram</a
+          >
+          <a class="twitter" href="https://twitter.com/K2remM">Twitter</a>
+          <a class="gmail" href="mailto:kareem147j@gmail.com">Gmail</a>
+        </div>
+        <h1 class="or">OR</h1>
+        <div class="social_2">
+          <a class="watsapp" onclick="butWats()">Watsapp</a>
+          <h1 id="butWats" class="wats-number">***********</h1>
+        </div>
+      </div>
+    </section>
+    <!--
+    <section class="send-message">
+      <div class="message-content">
+        <div class="title-message">
+          <h1>هل اعجبك الموقع ؟</h1>
+        </div>
+        {% comment %} <div class="yes-no"> {% endcomment %}
+        <form method="POST" class="yes-no">
+          {% csrf_token %}
+          <a id="no" class="no" onclick="no()">No</a>
+          <a id="yes" class="yes" onclick="yes()">Yes</a>
+          <p id="thanks" class="none">thank you ... :)</p>
+          <div id="text-message" class="none">
+            <h1>-_- اخبرنا لماذا لم يعجبك الموقع</h1>
+            {{report.report}}
+            <input type="submit" id="but-done" onclick="done()" value="إرسال">
+            <p id="done2" class="none">....تم الإرسال بنجاح</p>
+          </div>
+      </form>
+        {% comment %} </div> {% endcomment %}
+      </div>
+    </section>
+    -->
+    <!-- user comment section -->
+
+    <section class="comment-div"">
+        <div style="background:#87CEFA; margin:auto" class="contact-title">
+            <h2  style="color:#fff">COMMENTS</h2>
+        </div>
+      <div class="co-style">
+
+        {% comment %} start comment  {% endcomment %}
+
+        {% for i in comments_models reversed %}
+        {% if i.activate == True %}
+        <a href="/comment-content/{{i.id}}" style="color:black;display:block;">
+        <div class="user-real-comment">
+            {% comment %} <div class="comment-content"> {% endcomment %}
+              <div class="user-photo-comment">
+                {% if i.image %}
+                <img src="{{i.image.url}}"  alt="user-photo"  width="60px"  height="60px" style="border-radius: 100px;margin-right: 10px;border: 1px solid gray;"/>
+                {% endif %}
+              </div>
+              <div class="comment-posted">
+                <h3 class="com-write" style="font-weight:100;font-family: 'Phudu', cursive;">{{i.name|capfirst}}</h3>
+                <p style="font-size:0.9em;color:gray">{{i.time}}</p>
+                <h4 class="com-write" style="display:flex;font-weight:bold">{{i.comment|truncatechars:90}}</h4>
+              </div>
+            {% comment %} </div> {% endcomment %}
+            <hr>
+
+          </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+        <div class="span-comment">.
+        </div>
+        <div class="title-comment">
+            <h1>Enter you comment</h1>
+            
+        </div>
+
+        {% comment %}  {% endcomment %}
+
+
+        <div class="comment-form">
+          <form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %} 
+            <h3>Name: </h3>
+            <br>
+            {{comment.name}}
+            <br>
+            <h3>Comment: </h3>
+            <br>
+            {{comment.comment}}
+            <br>
+            {{comment.image}}
+            <input type="submit" value="Save" class="save-comment" class="save-comment"/>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <h1>POWERED BY <span>@karem Magdy</span></h1>
+    </footer>
+
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'main.js' %}"></script>
+  </body>
+</html>
+{% endblock content %}
